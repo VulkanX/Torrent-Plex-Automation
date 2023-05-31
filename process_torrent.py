@@ -129,9 +129,9 @@ for tag in config["filters"][type_index]["required_tags"]:
         exit()
 
 # Unrar files if rar files present
-extracted_folder = True # Change if rar files found and extracted
-# if config["filters"][type_index]["unrar"]:
-#     extracted_folder = unrar_files(torrent_path)
+extracted_folder = False # Change if rar files found and extracted
+if config["filters"][type_index]["unrar"]:
+    extracted_folder = unrar_files(torrent_path)
 
 # Generate the destination folder path
 destination = gen_destination_string(type_index, torrent_tags)
