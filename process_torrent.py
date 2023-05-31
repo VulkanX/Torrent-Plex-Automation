@@ -39,6 +39,7 @@ formatter = logging.Formatter('%(asctime)s -- %(levelname)s -- ' + torrent_id + 
 Log_File_Size = 5000000 # 5 MB
 Log_File_Count = 10 # 10 Log Files
 
+
 # Console Logging
 stdout_handler = logging.StreamHandler(sys.stdout)
 stdout_handler.setLevel(logging.DEBUG)
@@ -56,11 +57,12 @@ logger.addHandler(file_handler)
 rar_extracted = False # Will become true if RAR files are found and extracted
 rar_files = [] # List of RAR files found in torrent_path
 
-logging.basicConfig(filename='script_log.txt', filemode='a', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger.info("Processing Torrent: " + torrent_name)
+logging.basicConfig(filename=sys.path[0] + '\script_log.txt', filemode='a', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 ## Custom Functions
 
 def load_config():
-    json_data = open(".\config.json").read()
+    json_data = open(f"{sys.path[0]}\config.json").read()
     config = json.loads(json_data)
     return config
 
