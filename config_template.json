@@ -1,0 +1,41 @@
+{
+    "unrar_all": false,
+    "filters" : [
+        {
+            "name" : "TV Show",
+            "type" : "tvshow",
+            "unrar" : "True",
+            "file_types" : [
+                "mkv","mp4","avi","m4v"
+            ],
+            "required_tags" : [
+                "title","season","year"
+            ],
+            "destination" : "\\\\ServerName\\TV Shows\\%%title%% (%%year%%)\\Season %%season%%"
+        },
+        {
+            "name" : "Movie",
+            "type" : "movie",
+            "unrar" : "True",
+            "file_types" : [
+                "mkv","mp4","avi","m4v"
+            ],
+            "required_tags" : [
+                "title","year"
+            ],
+            "destination" : "\\\\ServerName\\Movies\\%%title%% (%%year%%)"
+        },
+        {
+            "name" : "Korean TV Show",
+            "type" : "koreantvshow",
+            "unrar" : "True",
+            "file_types" : [
+                "mkv","mp4","avi","m4v", "srt"
+            ],
+            "required_tags" : [
+                "title","season","year"
+            ],
+            "destination" : "\\\\ServerName\\Korean TV Shows\\%%title%% (%%year%%)\\Season %%season%%"
+        }
+    ]
+}
