@@ -19,10 +19,10 @@ import json
 import sys
 import subprocess
 import glob
-import logging
 import os
 import shutil
-
+import logging
+from logging.handlers import RotatingFileHandler
 
 ## Process Script Arguments
 torrent_name = sys.argv[1] # Torrent Name
@@ -36,6 +36,8 @@ torrent_content_path = sys.argv[5] # Torrent Content Path
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s -- %(levelname)s -- ' + torrent_id + ' -- %(message)s')
+Log_File_Size = 5000000 # 5 MB
+Log_File_Count = 10 # 10 Log Files
 
 # Console Logging
 stdout_handler = logging.StreamHandler(sys.stdout)
@@ -44,7 +46,7 @@ stdout_handler.setFormatter(formatter)
 logger.addHandler(stdout_handler)
 
 # File Logging
-file_handler = logging.FileHandler("script_log.txt")
+file_handler = RotatingFileHandler("script_log.txt", mode='a', maxBytes=Log_File_Size, backupCount=Log_File_Count, encoding=None, delay=0)
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
