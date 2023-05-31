@@ -65,23 +65,23 @@ def unrar_files(folder_path):
         rar_files.append(file)
 
     if len(rar_files) > 0:
-        print("RAR Files Found :: " + str(rar_files))
+        logging.info("RAR Files Found :: " + str(rar_files))
         # Unrar all files in torrent_path
-        print("Unraring files...")
+        logging.info("Unraring files...")
         try:
             for file in rar_files:
-                print(f"Trying to Unrar -- {file}")
+                logging.info("Trying to Unrar -- " + file)
                 rcode = subprocess.run(["unrar", "x", "-y", file, folder_path + "\\extracted\\"]).returncode
                 if rcode == 0:
-                    print("Unrar complete")
+                    logging.info("Unrar complete")
                     rar_extracted = True
                 else:
-                    print("Unrar failed")
+                    logging.info("Unrar failed")
         except Exception as e:
-            print("Unrar failed")
-            print(e)
+            logging.error("Unrar failed")
+            logging.error(e)
     else:
-        print("No RAR Files Found")
+        logging.info("No RAR Files Found")
     
 ## Load Configuration
 config = load_config()
@@ -97,8 +97,10 @@ type_index = check_filter_index(torrent_tags["type"])
 
 # Confirm a matching config section was found
 if type_index == -1:
-    print("No matching filter found")
+    logging.critical("No matching config section found for torrent type: " + torrent_tags["type"])
     exit()
+else:
+    logging.info("Found config section for torrent type: " + torrent_tags["type"])
 
 # Confirm all required tags are present or exit
 for tag in config["filters"][type_index]["required_tags"]:
