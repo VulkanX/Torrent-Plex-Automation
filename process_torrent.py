@@ -47,7 +47,7 @@ stdout_handler.setFormatter(formatter)
 logger.addHandler(stdout_handler)
 
 # File Logging
-file_handler = RotatingFileHandler("script_log.txt", mode='a', maxBytes=Log_File_Size, backupCount=Log_File_Count, encoding=None, delay=0)
+file_handler = RotatingFileHandler(f"{sys.path[0]}\script_log.txt", mode='a', maxBytes=Log_File_Size, backupCount=Log_File_Count, encoding=None, delay=0)
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -58,9 +58,8 @@ rar_extracted = False # Will become true if RAR files are found and extracted
 rar_files = [] # List of RAR files found in torrent_path
 
 logger.info("Processing Torrent: " + torrent_name)
-logging.basicConfig(filename=sys.path[0] + '\script_log.txt', filemode='a', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-## Custom Functions
 
+## Custom Functions
 def load_config():
     json_data = open(f"{sys.path[0]}\config.json").read()
     config = json.loads(json_data)
