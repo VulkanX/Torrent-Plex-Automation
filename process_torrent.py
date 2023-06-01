@@ -21,6 +21,7 @@ import subprocess
 import glob
 import os
 import shutil
+import time
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -80,6 +81,7 @@ def gen_destination_string(filter_index, tags):
     return destination
 
 def unrar_files(folder_path):
+    time.sleep(15) # Wait 15 seconds to allow QBittorrent to finish Processing the files
     rar_extracted = False
     # Get list of RAR files in torrent_path
     logging.info("Checking for RAR files...")
